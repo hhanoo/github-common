@@ -134,9 +134,6 @@ done <<< "${COMMITS}"
 # - Hide internal/noisy sections from public release notes
 # =============================================================================
 {
-  echo "## ${TAG_NAME}"
-  echo
-
   if [[ -n "${PREV_TAG}" ]]; then
     echo "Changes since \`${PREV_TAG}\`."
   else
@@ -146,42 +143,42 @@ done <<< "${COMMITS}"
 
   # --- Breaking ---
   if [[ -s "${TMP_DIR}/breaking.txt" ]]; then
-    echo "### Breaking Changes"
+    echo "## Breaking Changes"
     sort -u "${TMP_DIR}/breaking.txt"
     echo
   fi
 
   # --- Hotfix ---
   if [[ -s "${TMP_DIR}/hotfix.txt" ]]; then
-    echo "### Hotfix"
+    echo "## Hotfix"
     sort -u "${TMP_DIR}/hotfix.txt"
     echo
   fi
 
   # --- Features ---
   if [[ -s "${TMP_DIR}/features.txt" ]]; then
-    echo "### Features"
+    echo "## Features"
     sort -u "${TMP_DIR}/features.txt"
     echo
   fi
 
   # --- Fixes ---
   if [[ -s "${TMP_DIR}/fixes.txt" ]]; then
-    echo "### Fixes"
+    echo "## Fixes"
     sort -u "${TMP_DIR}/fixes.txt"
     echo
   fi
 
   # --- Improvements (perf + refactor + cleanup 통합) ---
   if [[ -s "${TMP_DIR}/perf.txt" || -s "${TMP_DIR}/refactor.txt" || -s "${TMP_DIR}/cleanup.txt" ]]; then
-    echo "### Improvements"
+    echo "## Improvements"
     cat "${TMP_DIR}/perf.txt" "${TMP_DIR}/refactor.txt" "${TMP_DIR}/cleanup.txt" 2>/dev/null | sort -u
     echo
   fi
 
   # --- Documentation ---
   if [[ -s "${TMP_DIR}/docs.txt" ]]; then
-    echo "### Documentation"
+    echo "## Documentation"
     sort -u "${TMP_DIR}/docs.txt"
     echo
   fi
@@ -197,7 +194,7 @@ done <<< "${COMMITS}"
 
   if [[ -n "${PREV_TAG}" ]]; then
     echo "---"
-    echo "Full Changelog: \`${PREV_TAG}...${TAG_NAME}\`"
+    echo "**Full Changelog**: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/${PREV_TAG}...${TAG_NAME}"
   fi
 } > RELEASE_NOTES.md
 
