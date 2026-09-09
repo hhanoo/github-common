@@ -30,7 +30,7 @@ on:
         description: Runner label for release job
         required: false
         type: string
-        default: ubuntu-22.04
+        default: ubuntu-latest
 
 # =============================================================================
 # 권한 설정
@@ -44,7 +44,7 @@ jobs:
   release:
     # =========================================================================
     # 실행 환경
-    # - 기본값은 ubuntu-22.04
+    # - 기본값은 ubuntu-latest (현재 Ubuntu 24.04)
     # - 호출한 워크플로우에서 runner 입력값으로 덮어쓸 수 있음
     # =========================================================================
     runs-on: ${{ inputs.runner }}

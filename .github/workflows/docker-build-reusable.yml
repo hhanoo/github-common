@@ -9,7 +9,7 @@
 #   - images: 빌드할 이미지 정보 JSON 배열
 #     예: [{"tag":"humble-desktop","repo":"hhanoo/ros","path":"ros/humble/desktop"}]
 #     선택 필드 source_repo / source_ref 로 다른 저장소를 빌드 대상으로 지정 가능
-#   - runner: 실행 환경 (기본값: ubuntu-22.04)
+#   - runner: 실행 환경 (기본값: ubuntu-latest)
 #
 # 시크릿:
 #   - DOCKERHUB_USERNAME: Docker Hub 사용자명
@@ -41,7 +41,7 @@ on:
         description: Runner label for build jobs
         required: false
         type: string
-        default: ubuntu-22.04
+        default: ubuntu-latest
     secrets:
       DOCKERHUB_USERNAME:
         description: Docker Hub username
@@ -57,7 +57,7 @@ jobs:
   build:
     # =========================================================================
     # 실행 환경
-    # - 기본값은 ubuntu-22.04
+    # - 기본값은 ubuntu-latest (현재 Ubuntu 24.04)
     # - 호출한 워크플로우에서 runner 입력값으로 덮어쓸 수 있음
     # =========================================================================
     runs-on: ${{ inputs.runner }}
