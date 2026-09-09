@@ -80,7 +80,7 @@ jobs:
       # - SOURCE_REPO_TOKEN 이 없으면 GITHUB_TOKEN 으로 대체 (공개 저장소는 이것으로 충분)
       # =======================================================================
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ matrix.source_repo || github.repository }}
           ref: ${{ matrix.source_ref || '' }}
@@ -91,14 +91,14 @@ jobs:
       # - 고급 빌드 기능(캐시 등)을 사용하기 위해 Buildx를 활성화
       # =======================================================================
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       # =======================================================================
       # 3단계: Docker Hub 로그인
       # - 시크릿으로 전달받은 인증 정보를 사용
       # =======================================================================
       - name: Login to Docker Hub
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -110,7 +110,7 @@ jobs:
       # - provenance: false → 불필요한 attestation 비활성화 (디스크 절약)
       # =======================================================================
       - name: Build and push ${{ matrix.repo }}:${{ matrix.tag }}
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ${{ matrix.path }}
           file: ${{ matrix.path }}/Dockerfile

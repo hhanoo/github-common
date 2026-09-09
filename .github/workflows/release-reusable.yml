@@ -55,7 +55,7 @@ jobs:
       # - 이전 태그와 현재 태그를 비교하려면 shallow clone 이 아닌 전체 이력이 필요함
       # =======================================================================
       - name: Checkout source # Get full git history (전체 Git 히스토리 가져오기)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
